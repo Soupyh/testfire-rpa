@@ -207,3 +207,225 @@ NameError: name 'extraer_movimientos' is not defined
 2026-09-04 12:50:06,298 | INFO | Se extrajeron 100 filas de movimientos.
 2026-09-04 12:50:06,672 | INFO | Excel generado: salida\movimientos_20260904_125006.xlsx
 2026-09-04 12:50:11,052 | INFO | Fin de ejecución del robot.
+2026-09-04 15:58:25,506 | INFO | Inicio de ejecución del robot.
+2026-09-04 15:58:29,897 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 15:58:29,897 | INFO | Intentando iniciar sesión.
+2026-09-04 15:58:50,302 | ERROR | Error de Selenium: Message: No se encontró ninguno de los elementos esperados: [('name', 'uid'), ('xpath', "//input[contains(@id,'uid')]")]
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 63, in buscar_primero
+    return WebDriverWait(driver, timeout).until(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.visibility_of_element_located((by, valor))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\bleal\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff7c214e035+5745]
+	chromedriver!(No symbol) [0x7ff7c2076a90]
+	chromedriver!(No symbol) [0x7ff7c1ea5d7d]
+	chromedriver!(No symbol) [0x7ff7c1f009ea]
+	chromedriver!(No symbol) [0x7ff7c1f00cfc]
+	chromedriver!(No symbol) [0x7ff7c1f518f7]
+	chromedriver!(No symbol) [0x7ff7c1f4e502]
+	chromedriver!(No symbol) [0x7ff7c1ef2e4b]
+	chromedriver!(No symbol) [0x7ff7c1ef3d83]
+	chromedriver!GetHandleVerifier [0x7ff7c2562f8b+41a69b]
+	chromedriver!GetHandleVerifier [0x7ff7c2590132+447842]
+	chromedriver!GetHandleVerifier [0x7ff7c2583e7e+43b58e]
+	chromedriver!GetHandleVerifier [0x7ff7c2243f5e+fb66e]
+	chromedriver!(No symbol) [0x7ff7c208419c]
+	chromedriver!(No symbol) [0x7ff7c207fdd4]
+	chromedriver!(No symbol) [0x7ff7c207ff64]
+	chromedriver!(No symbol) [0x7ff7c206a91c]
+	KERNEL32!BaseThreadInitThunk [0x7fff47b5ccb7+17]
+	ntdll!RtlUserThreadStart [0x7fff491ecaec+2c]
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 293, in main
+    if iniciar_sesion(driver, usuario, clave):
+       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 97, in iniciar_sesion
+    campo_usuario = buscar_primero(driver, [
+        (By.NAME, "uid"),
+        (By.XPATH, "//input[contains(@id,'uid')]")
+    ])
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 69, in buscar_primero
+    raise TimeoutException(
+        f"No se encontró ninguno de los elementos esperados: {localizadores}"
+    ) from ultimo_error
+selenium.common.exceptions.TimeoutException: Message: No se encontró ninguno de los elementos esperados: [('name', 'uid'), ('xpath', "//input[contains(@id,'uid')]")]
+
+2026-09-04 15:58:50,501 | INFO | Captura guardada: salida\capturas\99_error_selenium.png
+2026-09-04 15:58:55,084 | INFO | Fin de ejecución del robot.
+2026-09-04 16:00:50,717 | INFO | Inicio de ejecución del robot.
+2026-09-04 16:00:52,969 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 16:00:52,970 | INFO | Intentando iniciar sesión.
+2026-09-04 16:01:13,348 | ERROR | Error de Selenium: Message: No se encontró ninguno de los elementos esperados: [('name', 'uid'), ('xpath', "//input[contains(@id,'uid')]")]
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 63, in buscar_primero
+    return WebDriverWait(driver, timeout).until(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        EC.visibility_of_element_located((by, valor))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\bleal\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff7c214e035+5745]
+	chromedriver!(No symbol) [0x7ff7c2076a90]
+	chromedriver!(No symbol) [0x7ff7c1ea5d7d]
+	chromedriver!(No symbol) [0x7ff7c1f009ea]
+	chromedriver!(No symbol) [0x7ff7c1f00cfc]
+	chromedriver!(No symbol) [0x7ff7c1f518f7]
+	chromedriver!(No symbol) [0x7ff7c1f4e502]
+	chromedriver!(No symbol) [0x7ff7c1ef2e4b]
+	chromedriver!(No symbol) [0x7ff7c1ef3d83]
+	chromedriver!GetHandleVerifier [0x7ff7c2562f8b+41a69b]
+	chromedriver!GetHandleVerifier [0x7ff7c2590132+447842]
+	chromedriver!GetHandleVerifier [0x7ff7c2583e7e+43b58e]
+	chromedriver!GetHandleVerifier [0x7ff7c2243f5e+fb66e]
+	chromedriver!(No symbol) [0x7ff7c208419c]
+	chromedriver!(No symbol) [0x7ff7c207fdd4]
+	chromedriver!(No symbol) [0x7ff7c207ff64]
+	chromedriver!(No symbol) [0x7ff7c206a91c]
+	KERNEL32!BaseThreadInitThunk [0x7fff47b5ccb7+17]
+	ntdll!RtlUserThreadStart [0x7fff491ecaec+2c]
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 303, in main
+    if iniciar_sesion(driver, usuario, clave):
+       ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 107, in iniciar_sesion
+    campo_usuario = buscar_primero(driver, [
+        (By.NAME, "uid"),
+        (By.XPATH, "//input[contains(@id,'uid')]")
+    ])
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 69, in buscar_primero
+    raise TimeoutException(
+        f"No se encontró ninguno de los elementos esperados: {localizadores}"
+    ) from ultimo_error
+selenium.common.exceptions.TimeoutException: Message: No se encontró ninguno de los elementos esperados: [('name', 'uid'), ('xpath', "//input[contains(@id,'uid')]")]
+
+2026-09-04 16:01:13,529 | INFO | Captura guardada: salida\capturas\99_error_selenium.png
+2026-09-04 16:01:17,845 | INFO | Fin de ejecución del robot.
+2026-09-04 17:37:24,819 | INFO | Inicio de ejecución del robot.
+2026-09-04 17:37:26,956 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 17:37:26,956 | ERROR | Error inesperado: iniciar_sesion() missing 2 required positional arguments: 'usuario' and 'clave'
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 303, in main
+    if iniciar_sesion(driver):
+       ~~~~~~~~~~~~~~^^^^^^^^
+TypeError: iniciar_sesion() missing 2 required positional arguments: 'usuario' and 'clave'
+2026-09-04 17:37:26,997 | INFO | Captura guardada: salida\capturas\99_error_general.png
+2026-09-04 17:37:31,309 | INFO | Fin de ejecución del robot.
+2026-09-04 17:39:29,684 | INFO | Inicio de ejecución del robot.
+2026-09-04 17:39:30,953 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 17:39:34,475 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-04 17:39:34,475 | INFO | Intentando iniciar sesión.
+2026-09-04 17:39:35,884 | INFO | Login correcto.
+2026-09-04 17:39:35,946 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 17:39:36,159 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 17:39:36,214 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 17:39:36,460 | INFO | Página de transacciones recientes abierta.
+2026-09-04 17:39:36,543 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 17:39:40,602 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 17:39:42,754 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 17:39:43,120 | INFO | Excel generado: salida\movimientos_20260904_173942.xlsx
+2026-09-04 17:39:47,408 | INFO | Fin de ejecución del robot.
+2026-09-04 17:40:27,923 | INFO | Inicio de ejecución del robot.
+2026-09-04 17:40:29,694 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 17:41:00,087 | ERROR | Error de Selenium: Message: No se pudo hacer clic en ninguno de estos elementos: [('link text', 'Sign In'), ('partial link text', 'Sign In'), ('xpath', "//a[contains(.,'Sign In')]")]
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 80, in click_primero
+    elemento = WebDriverWait(driver, timeout).until(
+        EC.element_to_be_clickable((by, valor))
+    )
+  File "C:\Users\bleal\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff66a49e035+5745]
+	chromedriver!(No symbol) [0x7ff66a3c6a90]
+	chromedriver!(No symbol) [0x7ff66a1f5d7d]
+	chromedriver!(No symbol) [0x7ff66a2509ea]
+	chromedriver!(No symbol) [0x7ff66a250cfc]
+	chromedriver!(No symbol) [0x7ff66a2a18f7]
+	chromedriver!(No symbol) [0x7ff66a29e502]
+	chromedriver!(No symbol) [0x7ff66a242e4b]
+	chromedriver!(No symbol) [0x7ff66a243d83]
+	chromedriver!GetHandleVerifier [0x7ff66a8b2f8b+41a69b]
+	chromedriver!GetHandleVerifier [0x7ff66a8e0132+447842]
+	chromedriver!GetHandleVerifier [0x7ff66a8d3e7e+43b58e]
+	chromedriver!GetHandleVerifier [0x7ff66a593f5e+fb66e]
+	chromedriver!(No symbol) [0x7ff66a3d419c]
+	chromedriver!(No symbol) [0x7ff66a3cfdd4]
+	chromedriver!(No symbol) [0x7ff66a3cff64]
+	chromedriver!(No symbol) [0x7ff66a3ba91c]
+	KERNEL32!BaseThreadInitThunk [0x7ffb9617ccb7+17]
+	ntdll!RtlUserThreadStart [0x7ffb9630caec+2c]
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 304, in main
+    ir_login(driver)
+    ~~~~~~~~^^^^^^^^
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 95, in ir_login
+    click_primero(driver, [
+    ~~~~~~~~~~~~~^^^^^^^^^^
+        (By.LINK_TEXT, "Sign In"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (By.PARTIAL_LINK_TEXT, "Sign In"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (By.XPATH, "//a[contains(.,'Sign In')]")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ])
+    ^^
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 88, in click_primero
+    raise TimeoutException(
+        f"No se pudo hacer clic en ninguno de estos elementos: {localizadores}"
+    ) from ultimo_error
+selenium.common.exceptions.TimeoutException: Message: No se pudo hacer clic en ninguno de estos elementos: [('link text', 'Sign In'), ('partial link text', 'Sign In'), ('xpath', "//a[contains(.,'Sign In')]")]
+
+2026-09-04 17:41:00,167 | INFO | Captura guardada: salida\capturas\99_error_selenium.png
+2026-09-04 17:41:04,518 | INFO | Fin de ejecución del robot.
+2026-09-04 17:41:49,971 | INFO | Inicio de ejecución del robot.
+2026-09-04 17:41:51,763 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 17:42:01,755 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-04 17:42:01,755 | INFO | Intentando iniciar sesión.
+2026-09-04 17:42:03,175 | INFO | Login correcto.
+2026-09-04 17:42:03,232 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 17:42:03,444 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 17:42:03,508 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 17:42:03,764 | INFO | Página de transacciones recientes abierta.
+2026-09-04 17:42:03,827 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 17:42:07,871 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 17:42:09,966 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 17:42:10,246 | INFO | Excel generado: salida\movimientos_20260904_174209.xlsx
+2026-09-04 17:42:14,407 | INFO | Fin de ejecución del robot.
+2026-09-04 17:44:33,108 | INFO | Inicio de ejecución del robot.
+2026-09-04 17:44:34,939 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 17:44:35,134 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-04 17:44:35,134 | INFO | Intentando iniciar sesión.
+2026-09-04 17:44:36,523 | INFO | Login correcto.
+2026-09-04 17:44:36,568 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 17:44:36,762 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 17:44:36,812 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 17:44:37,054 | INFO | Página de transacciones recientes abierta.
+2026-09-04 17:44:37,108 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 17:44:41,148 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 17:44:43,121 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 17:44:43,340 | INFO | Excel generado: salida\movimientos_20260904_174443.xlsx
+2026-09-04 17:44:47,476 | INFO | Fin de ejecución del robot.

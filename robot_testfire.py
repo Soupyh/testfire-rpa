@@ -13,10 +13,8 @@ Objetivo:
 8) Guardar capturas y logs como evidencia.
 """
 
-import os
 import time
 import logging
-import getpass
 from datetime import datetime
 from pathlib import Path
 
@@ -91,6 +89,16 @@ def click_primero(driver, localizadores, timeout=10):
         f"No se pudo hacer clic en ninguno de estos elementos: {localizadores}"
     ) from ultimo_error
 
+def ir_login(driver):
+    """Hace clic automáticamente en Sign In."""
+
+    click_primero(driver, [
+        (By.LINK_TEXT, "Sign In"),
+        (By.PARTIAL_LINK_TEXT, "Sign In"),
+        (By.XPATH, "//a[contains(.,'Sign In')]")
+    ])
+
+    logging.info("El robot abrió la página de inicio de sesión.")
 
 def iniciar_sesion(driver, usuario, clave):
     """Carga usuario/contraseña y valida si el login fue correcto."""
@@ -272,12 +280,14 @@ def main():
     print("=== ROBOT RPA - DEMO TESTFIRE ===")
 
     # Las credenciales no quedan escritas en el código.
-    usuario = os.getenv("TESTFIRE_USER") or input("Usuario TestFire: ")
-    clave = os.getenv("TESTFIRE_PASSWORD") or getpass.getpass("Contraseña TestFire: ")
+    usuario = "jsmith" # Usuario de inicio de sesión
+    clave = "demo1234" #Contraseña de inicio de sesión
 
     opciones = webdriver.ChromeOptions()
     opciones.add_argument("--start-maximized")
 
+    opciones.add_argument("--ignore-certificate-errors")
+    opciones.set_capability("acceptInsecureCerts", True)
     driver = None
 
     try:
@@ -291,6 +301,9 @@ def main():
         )
 
         captura(driver, "00_pagina_inicial")
+
+        # Hace clic en Sign In
+        ir_login(driver)
 
         if iniciar_sesion(driver, usuario, clave):
             ir_resumen_cuentas(driver)
