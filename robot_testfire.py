@@ -198,59 +198,62 @@ def seleccionar_cuenta_si_existe(driver):
 
 
 def extraer_movimientos(driver):
-    """
-    Extrae filas de una tabla de transacciones.
-    Usa un ciclo FOR, cumpliendo la exigencia de repetición de la rúbrica.
-    """
-    posibles_filas = [
-        (By.XPATH, "//table[@id='transactionTable']//tbody//tr"),
-        (By.XPATH, "//table[@id='transactionTable']//tr[td]"),
-        (By.XPATH, "//table[contains(.,'Transaction') or contains(.,'Date')]//tr[td]")
-    ]
+    """Extrae las transacciones de la tabla."""
 
-    filas = []
-    for localizador in posibles_filas:
-        try:
-            filas = WebDriverWait(driver, 5).until(
-                EC.presence_of_all_elements_located(localizador)
-            )
-            if filas:
-                break
-        except TimeoutException:
-            filas = []
+    tabla = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((
+            By.ID,
+            "_ctl0__ctl0_Content_Main_MyTransactions"
+        ))
+    )
+
+    filas = tabla.find_elements(By.TAG_NAME, "tr")
 
     movimientos = []
 
-    # CICLO FOR solicitado por la rúbrica.
+    # Recorremos todas las filas de la tabla
     for fila in filas:
+
         celdas = fila.find_elements(By.TAG_NAME, "td")
         valores = [celda.text.strip() for celda in celdas]
 
-        if valores:
+        # Evitamos guardar la cabecera y filas vacías
+        if valores and valores[0] != "Transaction ID":
             movimientos.append(valores)
 
-    # CONDICIONAL 3: validar si se extrajo información.
     if len(movimientos) > 0:
-        logging.info("Se extrajeron %s filas de movimientos.", len(movimientos))
+        logging.info(
+            "Se extrajeron %s filas de movimientos.",
+            len(movimientos)
+        )
     else:
-        logging.warning("No se encontraron movimientos para extraer.")
+        logging.warning(
+            "No se encontraron movimientos para extraer."
+        )
 
     return movimientos
 
 
 def guardar_excel(movimientos):
-    """Guarda los movimientos en un archivo Excel."""
     fecha = datetime.now().strftime("%Y%m%d_%H%M%S")
     archivo = CARPETA_SALIDA / f"movimientos_{fecha}.xlsx"
 
-    # Como la tabla del sitio puede variar, se generan nombres de columnas dinámicos.
     max_columnas = max((len(fila) for fila in movimientos), default=0)
 
     if max_columnas == 0:
         logging.warning("No se generó Excel porque no había datos.")
         return None
 
-    columnas = [f"Columna_{i}" for i in range(1, max_columnas + 1)]
+    columnas = [
+        "Transaction ID",
+        "Transaction Time",
+        "Account ID",
+        "Action",
+        "Amount"
+    ]
+
+    
+
     movimientos_normalizados = [
         fila + [""] * (max_columnas - len(fila))
         for fila in movimientos
@@ -264,6 +267,8 @@ def guardar_excel(movimientos):
 
 
 def main():
+
+    
     print("=== ROBOT RPA - DEMO TESTFIRE ===")
 
     # Las credenciales no quedan escritas en el código.

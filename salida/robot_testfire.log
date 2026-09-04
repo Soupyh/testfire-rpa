@@ -112,3 +112,98 @@ Traceback (most recent call last):
 ModuleNotFoundError: No module named 'openpyxl'
 2026-09-04 12:05:58,740 | INFO | Captura guardada: salida\capturas\99_error_general.png
 2026-09-04 12:06:02,967 | INFO | Fin de ejecución del robot.
+2026-09-04 12:19:28,359 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:19:30,577 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:19:30,577 | INFO | Intentando iniciar sesión.
+2026-09-04 12:19:36,534 | INFO | Login correcto.
+2026-09-04 12:19:36,807 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:19:37,045 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:19:37,110 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:19:37,361 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:19:37,598 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:19:41,645 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:19:56,771 | WARNING | No se encontraron movimientos para extraer.
+2026-09-04 12:19:56,771 | WARNING | No se generó Excel porque no había datos.
+2026-09-04 12:20:01,181 | INFO | Fin de ejecución del robot.
+2026-09-04 12:21:43,565 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:21:45,539 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:21:45,539 | INFO | Intentando iniciar sesión.
+2026-09-04 12:21:51,648 | INFO | Login correcto.
+2026-09-04 12:21:51,914 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:21:52,109 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:21:52,170 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:21:52,404 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:21:52,475 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:21:56,523 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:21:56,523 | ERROR | Error inesperado: name 'extraer_movimientos' is not defined
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 257, in main
+    movimientos = extraer_movimientos(driver)
+                  ^^^^^^^^^^^^^^^^^^^
+NameError: name 'extraer_movimientos' is not defined
+2026-09-04 12:21:56,651 | INFO | Captura guardada: salida\capturas\99_error_general.png
+2026-09-04 12:22:01,001 | INFO | Fin de ejecución del robot.
+2026-09-04 12:31:24,959 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:31:30,472 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:31:30,473 | INFO | Intentando iniciar sesión.
+2026-09-04 12:31:37,858 | INFO | Login correcto.
+2026-09-04 12:31:37,983 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:31:38,280 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:31:38,393 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:31:38,965 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:31:39,099 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:31:43,208 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:31:47,245 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 12:31:47,963 | INFO | Excel generado: salida\movimientos_20260904_123147.xlsx
+2026-09-04 12:31:52,498 | INFO | Fin de ejecución del robot.
+2026-09-04 12:36:59,218 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:37:02,017 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:37:02,017 | INFO | Intentando iniciar sesión.
+2026-09-04 12:37:16,138 | INFO | Login correcto.
+2026-09-04 12:37:16,256 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:37:16,605 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:37:16,728 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:37:17,117 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:37:17,222 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:37:21,328 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:37:26,686 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 12:37:27,192 | INFO | Excel generado: salida\movimientos_20260904_123726.xlsx
+2026-09-04 12:39:04,483 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:39:06,828 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:39:06,828 | INFO | Intentando iniciar sesión.
+2026-09-04 12:39:14,549 | INFO | Login correcto.
+2026-09-04 12:39:14,670 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:39:14,975 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:39:15,109 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:39:15,501 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:39:15,624 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:39:19,730 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:39:23,698 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 12:39:23,999 | INFO | Excel generado: salida\movimientos_20260904_123923.xlsx
+2026-09-04 12:39:28,502 | INFO | Fin de ejecución del robot.
+2026-09-04 12:40:27,944 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:40:30,286 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:40:30,286 | INFO | Intentando iniciar sesión.
+2026-09-04 12:40:48,486 | INFO | Login correcto.
+2026-09-04 12:40:48,600 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:40:48,978 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:40:49,084 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:40:49,482 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:40:49,598 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:40:53,706 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:40:58,319 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 12:40:58,618 | INFO | Excel generado: salida\movimientos_20260904_124058.xlsx
+2026-09-04 12:41:03,064 | INFO | Fin de ejecución del robot.
+2026-09-04 12:49:46,637 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:49:49,832 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:49:49,832 | INFO | Intentando iniciar sesión.
+2026-09-04 12:49:56,922 | INFO | Login correcto.
+2026-09-04 12:49:57,061 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:49:57,450 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:49:57,561 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:49:57,960 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:49:58,089 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:50:02,211 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:50:06,298 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-04 12:50:06,672 | INFO | Excel generado: salida\movimientos_20260904_125006.xlsx
+2026-09-04 12:50:11,052 | INFO | Fin de ejecución del robot.
