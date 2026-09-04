@@ -1,0 +1,114 @@
+2026-09-04 11:53:34,723 | INFO | Inicio de ejecución del robot.
+2026-09-04 11:53:36,769 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 11:53:36,769 | INFO | Intentando iniciar sesión.
+2026-09-04 11:53:43,255 | ERROR | Login inválido o no se pudo validar la sesión.
+2026-09-04 11:53:43,351 | INFO | Captura guardada: salida\capturas\01_error_login.png
+2026-09-04 11:53:47,618 | INFO | Fin de ejecución del robot.
+2026-09-04 11:56:00,512 | INFO | Inicio de ejecución del robot.
+2026-09-04 11:56:03,492 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 11:56:03,492 | INFO | Intentando iniciar sesión.
+2026-09-04 11:56:09,562 | ERROR | Login inválido o no se pudo validar la sesión.
+2026-09-04 11:56:09,825 | INFO | Captura guardada: salida\capturas\01_error_login.png
+2026-09-04 11:56:14,134 | INFO | Fin de ejecución del robot.
+2026-09-04 11:57:03,081 | INFO | Inicio de ejecución del robot.
+2026-09-04 11:57:04,818 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 11:57:04,819 | INFO | Intentando iniciar sesión.
+2026-09-04 11:57:11,290 | INFO | Login correcto.
+2026-09-04 11:57:11,402 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 11:57:11,643 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 11:57:11,714 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 11:57:42,210 | ERROR | Error de Selenium: Message: No se pudo hacer clic en ninguno de estos elementos: [('link text', 'Account Activity'), ('partial link text', 'Account Activity'), ('xpath', "//a[contains(.,'Account Activity')]")]
+Traceback (most recent call last):
+  File "C:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 82, in click_primero
+    elemento = WebDriverWait(driver, timeout).until(
+        EC.element_to_be_clickable((by, valor))
+    )
+  File "C:\Users\bleal\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\selenium\webdriver\support\wait.py", line 121, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: 
+Stacktrace:
+	chromedriver!GetHandleVerifier [0x7ff68bd1e035+5745]
+	chromedriver!(No symbol) [0x7ff68bc46a90]
+	chromedriver!(No symbol) [0x7ff68ba75d7d]
+	chromedriver!(No symbol) [0x7ff68bad09ea]
+	chromedriver!(No symbol) [0x7ff68bad0cfc]
+	chromedriver!(No symbol) [0x7ff68bb218f7]
+	chromedriver!(No symbol) [0x7ff68bb1e502]
+	chromedriver!(No symbol) [0x7ff68bac2e4b]
+	chromedriver!(No symbol) [0x7ff68bac3d83]
+	chromedriver!GetHandleVerifier [0x7ff68c132f8b+41a69b]
+	chromedriver!GetHandleVerifier [0x7ff68c160132+447842]
+	chromedriver!GetHandleVerifier [0x7ff68c153e7e+43b58e]
+	chromedriver!GetHandleVerifier [0x7ff68be13f5e+fb66e]
+	chromedriver!(No symbol) [0x7ff68bc5419c]
+	chromedriver!(No symbol) [0x7ff68bc4fdd4]
+	chromedriver!(No symbol) [0x7ff68bc4ff64]
+	chromedriver!(No symbol) [0x7ff68bc3a91c]
+	KERNEL32!BaseThreadInitThunk [0x7ff92b7bccb7+17]
+	ntdll!RtlUserThreadStart [0x7ff92c62caec+2c]
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 291, in main
+    ir_actividad_cuenta(driver)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 153, in ir_actividad_cuenta
+    click_primero(driver, [
+    ~~~~~~~~~~~~~^^^^^^^^^^
+        (By.LINK_TEXT, "Account Activity"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (By.PARTIAL_LINK_TEXT, "Account Activity"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        (By.XPATH, "//a[contains(.,'Account Activity')]")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ])
+    ^^
+  File "C:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 90, in click_primero
+    raise TimeoutException(
+        f"No se pudo hacer clic en ninguno de estos elementos: {localizadores}"
+    ) from ultimo_error
+selenium.common.exceptions.TimeoutException: Message: No se pudo hacer clic en ninguno de estos elementos: [('link text', 'Account Activity'), ('partial link text', 'Account Activity'), ('xpath', "//a[contains(.,'Account Activity')]")]
+
+2026-09-04 11:57:42,323 | INFO | Captura guardada: salida\capturas\99_error_selenium.png
+2026-09-04 11:57:46,574 | INFO | Fin de ejecución del robot.
+2026-09-04 12:05:28,053 | INFO | Inicio de ejecución del robot.
+2026-09-04 12:05:30,156 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-04 12:05:30,156 | INFO | Intentando iniciar sesión.
+2026-09-04 12:05:39,446 | INFO | Login correcto.
+2026-09-04 12:05:39,539 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-04 12:05:39,754 | INFO | Página de resumen de cuentas abierta.
+2026-09-04 12:05:39,822 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-04 12:05:40,076 | INFO | Página de transacciones recientes abierta.
+2026-09-04 12:05:40,156 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-04 12:05:44,200 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-04 12:05:58,656 | INFO | Se extrajeron 103 filas de movimientos.
+2026-09-04 12:05:58,667 | ERROR | Error inesperado: No module named 'openpyxl'
+Traceback (most recent call last):
+  File "C:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 296, in main
+    archivo = guardar_excel(movimientos)
+  File "C:\Users\bleal\OneDrive\Documentos\Automatizacion_testfire_RPA\robot_testfire.py", line 260, in guardar_excel
+    df.to_excel(archivo, index=False)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\bleal\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\core\generic.py", line 2300, in to_excel
+    formatter.write(
+    ~~~~~~~~~~~~~~~^
+        excel_writer,
+        ^^^^^^^^^^^^^
+    ...<6 lines>...
+        engine_kwargs=engine_kwargs,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\bleal\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\io\formats\excel.py", line 1003, in write
+    writer = ExcelWriter(
+        writer,
+    ...<2 lines>...
+        engine_kwargs=engine_kwargs,
+    )
+  File "C:\Users\bleal\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\pandas\io\excel\_openpyxl.py", line 58, in __init__
+    from openpyxl.workbook import Workbook
+ModuleNotFoundError: No module named 'openpyxl'
+2026-09-04 12:05:58,740 | INFO | Captura guardada: salida\capturas\99_error_general.png
+2026-09-04 12:06:02,967 | INFO | Fin de ejecución del robot.
