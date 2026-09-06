@@ -25,6 +25,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+class InterferenciaUsuario(Exception):
+    pass
 
 
 # -----------------------------
@@ -80,7 +82,10 @@ def click_primero(driver, localizadores, timeout=10):
             elemento = WebDriverWait(driver, timeout).until(
                 EC.element_to_be_clickable((by, valor))
             )
+            verificar_interferencia(driver)
+            iniciar_accion_robot(driver)
             elemento.click()
+            terminar_accion_robot(driver)
             return
         except TimeoutException as error:
             ultimo_error = error
@@ -88,6 +93,68 @@ def click_primero(driver, localizadores, timeout=10):
     raise TimeoutException(
         f"No se pudo hacer clic en ninguno de estos elementos: {localizadores}"
     ) from ultimo_error
+def activar_monitor_interferencia(driver):
+    """Detecta cambios o acciones manuales del usuario dentro de la página."""
+
+    driver.execute_script("""
+        window.robotActuando = false;
+        window.interferenciaUsuario = false;
+        window.detalleInterferencia = "";
+
+        ["input", "change", "keydown", "click"].forEach(function(tipo) {
+
+            document.addEventListener(tipo, function(evento) {
+
+                if (!window.robotActuando) {
+
+                    window.interferenciaUsuario = true;
+
+                    window.detalleInterferencia =
+                        tipo + " en elemento " +
+                        evento.target.tagName +
+                        " id=" + (evento.target.id || "sin-id");
+                }
+
+            }, true);
+
+        });
+    """)
+
+    logging.info("Monitor de interferencia activado.")
+
+def verificar_interferencia(driver):
+    """Comprueba si el usuario intervino manualmente."""
+
+    interferencia = driver.execute_script(
+        "return window.interferenciaUsuario === true;"
+    )
+
+    if interferencia:
+
+        detalle = driver.execute_script(
+            "return window.detalleInterferencia;"
+        )
+
+        logging.error(
+            "Interferencia humana detectada: %s",
+            detalle
+        )
+
+        captura(driver, "99_interferencia_usuario")
+
+        raise InterferenciaUsuario(
+            f"El usuario intervino en la automatización: {detalle}"
+        )
+def iniciar_accion_robot(driver):
+    driver.execute_script(
+        "window.robotActuando = true;"
+    )
+
+
+def terminar_accion_robot(driver):
+    driver.execute_script(
+        "window.robotActuando = false;"
+    )
 
 def ir_login(driver):
     """Hace clic automáticamente en Sign In."""
@@ -113,12 +180,15 @@ def iniciar_sesion(driver, usuario, clave):
         (By.NAME, "passw"),
         (By.XPATH, "//input[@type='password']")
     ])
+    verificar_interferencia(driver)
 
+    iniciar_accion_robot(driver)
     campo_usuario.clear()
     campo_usuario.send_keys(usuario)
 
     campo_clave.clear()
     campo_clave.send_keys(clave)
+    terminar_accion_robot(driver)
 
     click_primero(driver, [
         (By.NAME, "btnSubmit"),
@@ -276,22 +346,28 @@ def guardar_excel(movimientos):
 
 def main():
 
-    
     print("=== ROBOT RPA - DEMO TESTFIRE ===")
 
-    # Las credenciales no quedan escritas en el código.
-    usuario = "jsmith" # Usuario de inicio de sesión
-    clave = "demo1234" #Contraseña de inicio de sesión
+    # Credenciales del entorno demo
+    usuario = "jsmith"
+    clave = "demo1234"
 
+    # Configuración de Chrome
     opciones = webdriver.ChromeOptions()
     opciones.add_argument("--start-maximized")
 
+    # Ignora el error de certificado del sitio demo
     opciones.add_argument("--ignore-certificate-errors")
     opciones.set_capability("acceptInsecureCerts", True)
+
     driver = None
 
     try:
         logging.info("Inicio de ejecución del robot.")
+
+        # -------------------------
+        # ABRIR TESTFIRE
+        # -------------------------
 
         driver = webdriver.Chrome(options=opciones)
         driver.get(URL)
@@ -300,49 +376,197 @@ def main():
             EC.presence_of_element_located((By.TAG_NAME, "body"))
         )
 
+        # Activamos monitor de interferencia
+        activar_monitor_interferencia(driver)
+
         captura(driver, "00_pagina_inicial")
 
-        # Hace clic en Sign In
+        # Espera 3 segundos
+        time.sleep(3)
+
+        # Verifica si el usuario intervino
+        verificar_interferencia(driver)
+
+
+        # -------------------------
+        # SIGN IN
+        # -------------------------
+
         ir_login(driver)
 
+        # Como cambió la página, reactivamos el monitor
+        activar_monitor_interferencia(driver)
+
+        time.sleep(3)
+
+        verificar_interferencia(driver)
+
+
+        # -------------------------
+        # LOGIN
+        # -------------------------
+
         if iniciar_sesion(driver, usuario, clave):
+
+            # El login cambia nuevamente la página
+            activar_monitor_interferencia(driver)
+
+            time.sleep(3)
+
+            verificar_interferencia(driver)
+
+
+            # -------------------------
+            # RESUMEN DE CUENTAS
+            # -------------------------
+
             ir_resumen_cuentas(driver)
+
+            # Nueva página = nuevo monitor
+            activar_monitor_interferencia(driver)
+
+            time.sleep(3)
+
+            verificar_interferencia(driver)
+
+
+            # -------------------------
+            # TRANSACCIONES RECIENTES
+            # -------------------------
+
             ir_actividad_cuenta(driver)
+
+            # Nueva página = nuevo monitor
+            activar_monitor_interferencia(driver)
+
+            time.sleep(3)
+
+            verificar_interferencia(driver)
+
+
+            # -------------------------
+            # SELECCIONAR CUENTA
+            # -------------------------
+
             seleccionar_cuenta_si_existe(driver)
 
+            # Por seguridad reactivamos el monitor,
+            # ya que esta función podría provocar una recarga
+            activar_monitor_interferencia(driver)
+
+            time.sleep(3)
+
+            verificar_interferencia(driver)
+
+
+            # -------------------------
+            # EXTRAER MOVIMIENTOS
+            # -------------------------
+
             movimientos = extraer_movimientos(driver)
+
+            time.sleep(3)
+
+            verificar_interferencia(driver)
+
+
+            # -------------------------
+            # GENERAR EXCEL
+            # -------------------------
+
             archivo = guardar_excel(movimientos)
 
             if archivo:
                 print(f"OK: reporte generado en {archivo}")
             else:
-                print("El robot terminó, pero no encontró movimientos para exportar.")
+                print(
+                    "El robot terminó, pero no encontró "
+                    "movimientos para exportar."
+                )
 
         else:
-            print("ERROR: credenciales inválidas o sesión no iniciada.")
+            print(
+                "ERROR: credenciales inválidas "
+                "o sesión no iniciada."
+            )
 
-    # EXCEPCIÓN / MANEJO DE ERROR exigido por la rúbrica.
+
+    # -------------------------
+    # INTERFERENCIA DEL USUARIO
+    # -------------------------
+
+    except InterferenciaUsuario as error:
+
+        logging.error(str(error))
+
+        print("AUTOMATIZACIÓN CANCELADA:")
+        print("Se detectó intervención manual del usuario.")
+
+
+    # -------------------------
+    # ERRORES DE SELENIUM
+    # -------------------------
+
     except (TimeoutException, NoSuchElementException) as error:
-        logging.exception("Error de Selenium: %s", error)
-        print("ERROR: no se encontró un elemento esperado en la página.")
+
+        logging.exception(
+            "Error de Selenium: %s",
+            error
+        )
+
+        print(
+            "ERROR: no se encontró un elemento "
+            "esperado en la página."
+        )
 
         if driver:
-            captura(driver, "99_error_selenium")
+            captura(
+                driver,
+                "99_error_selenium"
+            )
+
+
+    # -------------------------
+    # OTROS ERRORES
+    # -------------------------
 
     except Exception as error:
-        logging.exception("Error inesperado: %s", error)
-        print(f"ERROR inesperado: {error}")
+
+        logging.exception(
+            "Error inesperado: %s",
+            error
+        )
+
+        print(
+            f"ERROR inesperado: {error}"
+        )
 
         if driver:
-            captura(driver, "99_error_general")
+            captura(
+                driver,
+                "99_error_general"
+            )
+
+
+    # -------------------------
+    # CIERRE DEL ROBOT
+    # -------------------------
 
     finally:
+
         if driver:
             time.sleep(2)
             driver.quit()
 
-        logging.info("Fin de ejecución del robot.")
-        print("Proceso finalizado. Revisa la carpeta 'salida' para logs, Excel y capturas.")
+        logging.info(
+            "Fin de ejecución del robot."
+        )
+
+        print(
+            "Proceso finalizado. "
+            "Revisa la carpeta 'salida' "
+            "para logs, Excel y capturas."
+        )
 
 
 if __name__ == "__main__":
