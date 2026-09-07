@@ -483,3 +483,184 @@ selenium.common.exceptions.TimeoutException: Message: No se pudo hacer clic en n
 2026-09-06 22:51:11,022 | INFO | Log enviado correctamente a Google Sheets.
 2026-09-06 22:51:15,246 | INFO | Fin de ejecución del robot.
 2026-09-06 22:51:17,170 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:15:09,205 | INFO | Inicio de ejecución del robot.
+2026-09-06 23:15:12,012 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:15:14,237 | INFO | Monitor de interferencia activado.
+2026-09-06 23:15:14,309 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-06 23:15:17,540 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-06 23:15:17,544 | INFO | Monitor de interferencia activado.
+2026-09-06 23:15:20,548 | INFO | Intentando iniciar sesión.
+2026-09-06 23:15:22,005 | INFO | Login correcto.
+2026-09-06 23:15:23,956 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:15:24,014 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-06 23:15:24,019 | INFO | Monitor de interferencia activado.
+2026-09-06 23:15:27,262 | INFO | Página de resumen de cuentas abierta.
+2026-09-06 23:15:29,371 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:15:29,421 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-06 23:15:29,425 | INFO | Monitor de interferencia activado.
+2026-09-06 23:15:32,685 | INFO | Página de transacciones recientes abierta.
+2026-09-06 23:15:34,505 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:15:34,584 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-06 23:15:34,588 | INFO | Monitor de interferencia activado.
+2026-09-06 23:15:41,653 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-06 23:15:41,658 | INFO | Monitor de interferencia activado.
+2026-09-06 23:15:47,576 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-06 23:15:49,116 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:15:52,292 | INFO | Excel generado: salida\movimientos_20260906_231552.xlsx
+2026-09-06 23:15:55,700 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:15:59,832 | INFO | Fin de ejecución del robot.
+2026-09-06 23:16:01,738 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:29:08,505 | INFO | Inicio de ejecución del robot.
+2026-09-06 23:29:10,860 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:29:13,153 | INFO | Monitor de interferencia activado.
+2026-09-06 23:29:13,225 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-06 23:29:16,479 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-06 23:29:16,483 | INFO | Monitor de interferencia activado.
+2026-09-06 23:29:19,491 | INFO | Intentando iniciar sesión.
+2026-09-06 23:29:21,117 | INFO | Login correcto.
+2026-09-06 23:29:22,796 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:29:22,877 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-06 23:29:22,881 | INFO | Monitor de interferencia activado.
+2026-09-06 23:29:26,115 | INFO | Página de resumen de cuentas abierta.
+2026-09-06 23:29:28,155 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:29:28,228 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-06 23:29:28,234 | INFO | Monitor de interferencia activado.
+2026-09-06 23:29:31,537 | INFO | Página de transacciones recientes abierta.
+2026-09-06 23:29:33,364 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:29:33,451 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-06 23:29:33,455 | INFO | Monitor de interferencia activado.
+2026-09-06 23:29:40,532 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-06 23:29:40,536 | INFO | Monitor de interferencia activado.
+2026-09-06 23:29:47,524 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-06 23:29:49,154 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:29:52,525 | INFO | Excel generado: salida\movimientos_20260906_232952.xlsx
+2026-09-06 23:29:54,794 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:29:58,989 | INFO | Fin de ejecución del robot.
+2026-09-06 23:30:00,887 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:40:06,854 | INFO | Inicio de ejecución del robot.
+2026-09-06 23:40:06,854 | ERROR | Error inesperado: cannot access local variable 'fecha_hora' where it is not associated with a value
+Traceback (most recent call last):
+  File "c:\Users\bleal\OneDrive\Documentos\testfire-rpa\robot_testfire.py", line 470, in main
+    enviar_log_api(
+    ~~~~~~~~~~~~~~^
+        "INFO",
+        ^^^^^^^
+        "Robot",
+        ^^^^^^^^
+        "Inicio de ejecución del robot"
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "c:\Users\bleal\OneDrive\Documentos\testfire-rpa\robot_testfire.py", line 398, in enviar_log_api
+    if fecha_hora is None:
+       ^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'fecha_hora' where it is not associated with a value
+2026-09-06 23:40:06,856 | INFO | Fin de ejecución del robot.
+2026-09-06 23:41:58,030 | INFO | Inicio de ejecución del robot.
+2026-09-06 23:42:01,252 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:42:03,833 | INFO | Monitor de interferencia activado.
+2026-09-06 23:42:03,903 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-06 23:42:07,194 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-06 23:42:07,200 | INFO | Monitor de interferencia activado.
+2026-09-06 23:42:10,205 | INFO | Intentando iniciar sesión.
+2026-09-06 23:42:11,753 | INFO | Login correcto.
+2026-09-06 23:42:13,742 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:42:13,834 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-06 23:42:13,838 | INFO | Monitor de interferencia activado.
+2026-09-06 23:42:14,098 | INFO | Página de resumen de cuentas abierta.
+2026-09-06 23:42:15,626 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:42:15,705 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-06 23:42:15,709 | INFO | Monitor de interferencia activado.
+2026-09-06 23:42:19,003 | INFO | Página de transacciones recientes abierta.
+2026-09-06 23:42:20,892 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:42:20,976 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-06 23:42:20,981 | INFO | Monitor de interferencia activado.
+2026-09-06 23:42:28,053 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-06 23:42:28,055 | INFO | Monitor de interferencia activado.
+2026-09-06 23:42:34,984 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-06 23:42:37,794 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:42:41,147 | INFO | Excel generado: salida\movimientos_20260906_234240.xlsx
+2026-09-06 23:42:42,678 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:42:46,836 | INFO | Fin de ejecución del robot.
+2026-09-06 23:42:48,814 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:43:26,043 | INFO | Inicio de ejecución del robot.
+2026-09-06 23:43:28,721 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:43:31,071 | INFO | Monitor de interferencia activado.
+2026-09-06 23:43:31,135 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-06 23:43:34,417 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-06 23:43:34,422 | INFO | Monitor de interferencia activado.
+2026-09-06 23:43:37,431 | INFO | Intentando iniciar sesión.
+2026-09-06 23:43:38,995 | INFO | Login correcto.
+2026-09-06 23:43:40,497 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:43:40,556 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-06 23:43:40,561 | INFO | Monitor de interferencia activado.
+2026-09-06 23:43:40,829 | INFO | Página de resumen de cuentas abierta.
+2026-09-06 23:43:42,225 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:43:42,291 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-06 23:43:42,295 | INFO | Monitor de interferencia activado.
+2026-09-06 23:43:45,622 | INFO | Página de transacciones recientes abierta.
+2026-09-06 23:43:47,413 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:43:47,492 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-06 23:43:47,498 | INFO | Monitor de interferencia activado.
+2026-09-06 23:43:54,592 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-06 23:43:54,601 | INFO | Monitor de interferencia activado.
+2026-09-06 23:44:02,052 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-06 23:44:04,012 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:44:07,172 | INFO | Excel generado: salida\movimientos_20260906_234407.xlsx
+2026-09-06 23:44:08,812 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:44:12,932 | INFO | Fin de ejecución del robot.
+2026-09-06 23:44:14,907 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:49:03,004 | INFO | Inicio de ejecución del robot.
+2026-09-06 23:49:09,392 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:49:11,987 | INFO | Monitor de interferencia activado.
+2026-09-06 23:49:12,088 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-06 23:49:15,381 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-06 23:49:15,387 | INFO | Monitor de interferencia activado.
+2026-09-06 23:49:18,394 | INFO | Intentando iniciar sesión.
+2026-09-06 23:49:19,958 | INFO | Login correcto.
+2026-09-06 23:49:29,005 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:49:29,073 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-06 23:49:29,078 | INFO | Monitor de interferencia activado.
+2026-09-06 23:49:29,354 | INFO | Página de resumen de cuentas abierta.
+2026-09-06 23:49:34,010 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:49:34,080 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-06 23:49:34,084 | INFO | Monitor de interferencia activado.
+2026-09-06 23:49:37,391 | INFO | Página de transacciones recientes abierta.
+2026-09-06 23:49:48,737 | WARNING | Error conectando con API de logs: HTTPSConnectionPool(host='script.googleusercontent.com', port=443): Read timed out. (read timeout=10)
+2026-09-06 23:49:48,816 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-06 23:49:48,823 | INFO | Monitor de interferencia activado.
+2026-09-06 23:49:55,931 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-06 23:49:55,936 | INFO | Monitor de interferencia activado.
+2026-09-06 23:50:03,113 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-06 23:50:05,323 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:50:08,702 | INFO | Excel generado: salida\movimientos_20260906_235008.xlsx
+2026-09-06 23:50:11,107 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:50:15,280 | INFO | Fin de ejecución del robot.
+2026-09-06 23:50:17,644 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:50:36,595 | INFO | Inicio de ejecución del robot.
+2026-09-06 23:50:38,263 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:50:40,493 | INFO | Monitor de interferencia activado.
+2026-09-06 23:50:40,572 | INFO | Captura guardada: salida\capturas\00_pagina_inicial.png
+2026-09-06 23:50:43,813 | INFO | El robot abrió la página de inicio de sesión.
+2026-09-06 23:50:43,817 | INFO | Monitor de interferencia activado.
+2026-09-06 23:50:46,822 | INFO | Intentando iniciar sesión.
+2026-09-06 23:50:47,349 | INFO | Monitor de interferencia activado.
+2026-09-06 23:50:50,357 | INFO | Login correcto.
+2026-09-06 23:50:53,230 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:50:53,306 | INFO | Captura guardada: salida\capturas\01_login_correcto.png
+2026-09-06 23:50:53,561 | INFO | Monitor de interferencia activado.
+2026-09-06 23:50:56,566 | INFO | Página de resumen de cuentas abierta.
+2026-09-06 23:50:58,673 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:50:58,742 | INFO | Captura guardada: salida\capturas\02_account_summary.png
+2026-09-06 23:50:59,039 | INFO | Monitor de interferencia activado.
+2026-09-06 23:51:02,051 | INFO | Página de transacciones recientes abierta.
+2026-09-06 23:51:03,602 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:51:03,680 | INFO | Captura guardada: salida\capturas\03_recent_transactions.png
+2026-09-06 23:51:07,750 | INFO | No se encontró selector de cuenta; se continúa con la vista actual.
+2026-09-06 23:51:07,753 | INFO | Monitor de interferencia activado.
+2026-09-06 23:51:18,049 | INFO | Se extrajeron 100 filas de movimientos.
+2026-09-06 23:51:20,029 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:51:23,181 | INFO | Excel generado: salida\movimientos_20260906_235120.xlsx
+2026-09-06 23:51:24,607 | INFO | Log enviado correctamente a Google Sheets.
+2026-09-06 23:51:28,738 | INFO | Fin de ejecución del robot.
+2026-09-06 23:51:30,351 | INFO | Log enviado correctamente a Google Sheets.

@@ -102,6 +102,7 @@ def click_primero(driver, localizadores, timeout=10):
     raise TimeoutException(
         f"No se pudo hacer clic en ninguno de estos elementos: {localizadores}"
     ) from ultimo_error
+
 def activar_monitor_interferencia(driver):
     """Detecta cambios o acciones manuales del usuario dentro de la página."""
 
@@ -178,6 +179,7 @@ def ir_login(driver):
 
 def iniciar_sesion(driver, usuario, clave):
     """Carga usuario/contraseña y valida si el login fue correcto."""
+    inicio_login = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     logging.info("Intentando iniciar sesión.")
 
     campo_usuario = buscar_primero(driver, [
@@ -189,6 +191,7 @@ def iniciar_sesion(driver, usuario, clave):
         (By.NAME, "passw"),
         (By.XPATH, "//input[@type='password']")
     ])
+
     verificar_interferencia(driver)
 
     iniciar_accion_robot(driver)
@@ -205,7 +208,10 @@ def iniciar_sesion(driver, usuario, clave):
         (By.XPATH, "//button[contains(.,'Login')]")
     ])
 
-    time.sleep(1)
+    # Espera de presentación: la HoraFin se registra después.
+    activar_monitor_interferencia(driver)
+    time.sleep(3)
+    verificar_interferencia(driver)
 
     # CONDICIONAL 1: comprobar si el inicio de sesión fue exitoso.
     login_correcto = (
@@ -214,55 +220,75 @@ def iniciar_sesion(driver, usuario, clave):
         or "account summary" in driver.page_source.lower()
     )
 
+    fin_login = datetime.now().strftime("%H:%M:%S")
+
     if login_correcto:
         logging.info("Login correcto.")
         enviar_log_api(
             "INFO",
             "Login",
-            "Inicio de sesión correcto"
-    )
+            "Inicio de sesión correcto",
+            fecha_hora=inicio_login,
+            hora_fin=fin_login
+        )
         captura(driver, "01_login_correcto")
         return True
     else:
         logging.error("Login inválido o no se pudo validar la sesión.")
-
-        
         captura(driver, "01_error_login")
         return False
 
-
 def ir_resumen_cuentas(driver):
     """Navega a View Account Summary."""
+    inicio_proceso = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     click_primero(driver, [
         (By.LINK_TEXT, "View Account Summary"),
         (By.PARTIAL_LINK_TEXT, "Account Summary"),
         (By.XPATH, "//a[contains(.,'View Account Summary')]")
     ])
+
+    activar_monitor_interferencia(driver)
+    time.sleep(3)
+    verificar_interferencia(driver)
+
+    fin_proceso = datetime.now().strftime("%H:%M:%S")
+
     logging.info("Página de resumen de cuentas abierta.")
     enviar_log_api(
         "INFO",
         "Navegación",
-        "Página de resumen de cuentas abierta"
+        "Página de resumen de cuentas abierta",
+        fecha_hora=inicio_proceso,
+        hora_fin=fin_proceso
     )
     captura(driver, "02_account_summary")
 
-
 def ir_actividad_cuenta(driver):
     """Navega a View Recent Transactions."""
+    inicio_proceso = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     click_primero(driver, [
         (By.LINK_TEXT, "View Recent Transactions"),
         (By.PARTIAL_LINK_TEXT, "Recent Transactions"),
         (By.XPATH, "//a[contains(.,'View Recent Transactions')]")
     ])
 
+    activar_monitor_interferencia(driver)
+    time.sleep(3)
+    verificar_interferencia(driver)
+
+    fin_proceso = datetime.now().strftime("%H:%M:%S")
+
     logging.info("Página de transacciones recientes abierta.")
     enviar_log_api(
         "INFO",
         "Navegación",
-        "Página de transacciones recientes abierta"
+        "Página de transacciones recientes abierta",
+        fecha_hora=inicio_proceso,
+        hora_fin=fin_proceso
     )
     captura(driver, "03_recent_transactions")
-
 
 def seleccionar_cuenta_si_existe(driver):
     """
@@ -303,6 +329,7 @@ def seleccionar_cuenta_si_existe(driver):
 
 def extraer_movimientos(driver):
     """Extrae las transacciones de la tabla."""
+    inicio_proceso = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     tabla = WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((
@@ -312,18 +339,20 @@ def extraer_movimientos(driver):
     )
 
     filas = tabla.find_elements(By.TAG_NAME, "tr")
-
     movimientos = []
 
     # Recorremos todas las filas de la tabla
     for fila in filas:
-
         celdas = fila.find_elements(By.TAG_NAME, "td")
         valores = [celda.text.strip() for celda in celdas]
 
         # Evitamos guardar la cabecera y filas vacías
         if valores and valores[0] != "Transaction ID":
             movimientos.append(valores)
+
+    time.sleep(3)
+    verificar_interferencia(driver)
+    fin_proceso = datetime.now().strftime("%H:%M:%S")
 
     if len(movimientos) > 0:
         logging.info(
@@ -333,23 +362,25 @@ def extraer_movimientos(driver):
         enviar_log_api(
             "INFO",
             "Extracción",
-            f"Se extrajeron {len(movimientos)} movimientos"
+            f"Se extrajeron {len(movimientos)} movimientos",
+            fecha_hora=inicio_proceso,
+            hora_fin=fin_proceso
         )
     else:
-        logging.warning(
-            "No se encontraron movimientos para extraer."
-        )
+        logging.warning("No se encontraron movimientos para extraer.")
         enviar_log_api(
             "WARNING",
             "Extracción",
-            "No se encontraron movimientos para extraer"
+            "No se encontraron movimientos para extraer",
+            fecha_hora=inicio_proceso,
+            hora_fin=fin_proceso
         )
-
 
     return movimientos
 
-
 def guardar_excel(movimientos):
+    inicio_proceso = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     fecha = datetime.now().strftime("%Y%m%d_%H%M%S")
     archivo = CARPETA_SALIDA / f"movimientos_{fecha}.xlsx"
 
@@ -367,8 +398,6 @@ def guardar_excel(movimientos):
         "Amount"
     ]
 
-    
-
     movimientos_normalizados = [
         fila + [""] * (max_columnas - len(fila))
         for fila in movimientos
@@ -377,30 +406,48 @@ def guardar_excel(movimientos):
     df = pd.DataFrame(movimientos_normalizados, columns=columnas)
     df.to_excel(archivo, index=False)
 
+    time.sleep(3)
+    fin_proceso = datetime.now().strftime("%H:%M:%S")
+
     logging.info("Excel generado: %s", archivo)
     enviar_log_api(
         "INFO",
         "Excel",
-        f"Reporte generado correctamente: {archivo.name}"
-        )
+        f"Reporte generado correctamente: {archivo.name}",
+        fecha_hora=inicio_proceso,
+        hora_fin=fin_proceso
+    )
     return archivo
 
-def enviar_log_api(nivel, proceso, mensaje, estado_ejecucion=None):
+def enviar_log_api(
+    nivel,
+    proceso,
+    mensaje,
+    estado_ejecucion=None,
+    fecha_hora=None,
+    hora_fin=None
+):
     """Envía un log a Google Sheets mediante HTTP POST."""
+
     if estado_ejecucion is None:
         estado_ejecucion = ESTADO_EJECUCION
 
+    if fecha_hora is None:
+        fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+    if hora_fin is None:
+        hora_fin = datetime.now().strftime("%H:%M:%S")
 
     datos = {
-        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "fecha": fecha_hora,
         "nivel": nivel,
         "proceso": proceso,
         "mensaje": mensaje,
         "ejecucion_id": EJECUCION_ID,
         "estado_ejecucion": estado_ejecucion,
         "equipo": EQUIPO,
-        "sistema_operativo": SISTEMA_OPERATIVO
-
+        "sistema_operativo": SISTEMA_OPERATIVO,
+        "hora_fin": hora_fin
     }
 
     try:
@@ -424,7 +471,6 @@ def enviar_log_api(nivel, proceso, mensaje, estado_ejecucion=None):
             error
         )
 
-
 def main():
     print("Equipo:", EQUIPO)
     print("Sistema operativo:", SISTEMA_OPERATIVO)
@@ -437,6 +483,7 @@ def main():
         + EQUIPO
     )
     ESTADO_EJECUCION = "EN_PROCESO"
+    inicio_robot = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     print("=== ROBOT RPA - DEMO TESTFIRE ===")
 
@@ -460,7 +507,9 @@ def main():
         enviar_log_api(
             "INFO",
             "Robot",
-            "Inicio de ejecución del robot"
+            "Inicio de ejecución del robot",
+            fecha_hora=inicio_robot,
+            hora_fin=datetime.now().strftime("%H:%M:%S")
         )
 
         # -------------------------
@@ -506,26 +555,11 @@ def main():
 
         if iniciar_sesion(driver, usuario, clave):
 
-            # El login cambia nuevamente la página
-            activar_monitor_interferencia(driver)
-
-            time.sleep(3)
-
-            verificar_interferencia(driver)
-
-
             # -------------------------
             # RESUMEN DE CUENTAS
             # -------------------------
 
             ir_resumen_cuentas(driver)
-
-            # Nueva página = nuevo monitor
-            activar_monitor_interferencia(driver)
-
-            time.sleep(3)
-
-            verificar_interferencia(driver)
 
 
             # -------------------------
@@ -533,13 +567,6 @@ def main():
             # -------------------------
 
             ir_actividad_cuenta(driver)
-
-            # Nueva página = nuevo monitor
-            activar_monitor_interferencia(driver)
-
-            time.sleep(3)
-
-            verificar_interferencia(driver)
 
 
             # -------------------------
@@ -562,10 +589,6 @@ def main():
             # -------------------------
 
             movimientos = extraer_movimientos(driver)
-
-            time.sleep(3)
-
-            verificar_interferencia(driver)
 
 
             # -------------------------
@@ -699,7 +722,9 @@ def main():
             "INFO",
             "Robot",
             "Fin de ejecución del robot",
-            ESTADO_EJECUCION
+            ESTADO_EJECUCION,
+            fecha_hora=inicio_robot,
+            hora_fin=datetime.now().strftime("%H:%M:%S")
         )
 
         print(
