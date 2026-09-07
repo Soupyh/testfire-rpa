@@ -15,6 +15,9 @@ Objetivo:
 
 import time
 import logging
+import requests
+import socket
+import platform
 from datetime import datetime
 from pathlib import Path
 
@@ -33,6 +36,11 @@ class InterferenciaUsuario(Exception):
 # CONFIGURACIÓN
 # -----------------------------
 URL = "https://demo.testfire.net/"
+URL_API_LOGS = "https://script.google.com/macros/s/AKfycbzYAE9CxelORXH2E_b70id_FJYBSJhOHS79YOUwbI7VDoLv4pDe5vQeqT0C_a9Ds_yOlg/exec"
+EJECUCION_ID = None
+ESTADO_EJECUCION = "EN_PROCESO"
+EQUIPO = socket.gethostname()
+SISTEMA_OPERATIVO = platform.system()
 CARPETA_SALIDA = Path("salida")
 CARPETA_CAPTURAS = CARPETA_SALIDA / "capturas"
 CARPETA_SALIDA.mkdir(exist_ok=True)
@@ -207,10 +215,17 @@ def iniciar_sesion(driver, usuario, clave):
 
     if login_correcto:
         logging.info("Login correcto.")
+        enviar_log_api(
+            "INFO",
+            "Login",
+            "Inicio de sesión correcto"
+    )
         captura(driver, "01_login_correcto")
         return True
     else:
         logging.error("Login inválido o no se pudo validar la sesión.")
+
+        
         captura(driver, "01_error_login")
         return False
 
@@ -223,6 +238,11 @@ def ir_resumen_cuentas(driver):
         (By.XPATH, "//a[contains(.,'View Account Summary')]")
     ])
     logging.info("Página de resumen de cuentas abierta.")
+    enviar_log_api(
+        "INFO",
+        "Navegación",
+        "Página de resumen de cuentas abierta"
+    )
     captura(driver, "02_account_summary")
 
 
@@ -235,6 +255,11 @@ def ir_actividad_cuenta(driver):
     ])
 
     logging.info("Página de transacciones recientes abierta.")
+    enviar_log_api(
+        "INFO",
+        "Navegación",
+        "Página de transacciones recientes abierta"
+    )
     captura(driver, "03_recent_transactions")
 
 
@@ -304,10 +329,21 @@ def extraer_movimientos(driver):
             "Se extrajeron %s filas de movimientos.",
             len(movimientos)
         )
+        enviar_log_api(
+            "INFO",
+            "Extracción",
+            f"Se extrajeron {len(movimientos)} movimientos"
+        )
     else:
         logging.warning(
             "No se encontraron movimientos para extraer."
         )
+        enviar_log_api(
+            "WARNING",
+            "Extracción",
+            "No se encontraron movimientos para extraer"
+        )
+
 
     return movimientos
 
@@ -341,10 +377,65 @@ def guardar_excel(movimientos):
     df.to_excel(archivo, index=False)
 
     logging.info("Excel generado: %s", archivo)
+    enviar_log_api(
+        "INFO",
+        "Excel",
+        f"Reporte generado correctamente: {archivo.name}"
+        )
     return archivo
+
+def enviar_log_api(nivel, proceso, mensaje, estado_ejecucion=None):
+    """Envía un log a Google Sheets mediante HTTP POST."""
+    if estado_ejecucion is None:
+        estado_ejecucion = ESTADO_EJECUCION
+
+
+    datos = {
+        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "nivel": nivel,
+        "proceso": proceso,
+        "mensaje": mensaje,
+        "ejecucion_id": EJECUCION_ID,
+        "estado_ejecucion": estado_ejecucion,
+        "equipo": EQUIPO,
+        "sistema_operativo": SISTEMA_OPERATIVO
+
+    }
+
+    try:
+        respuesta = requests.post(
+            URL_API_LOGS,
+            json=datos,
+            timeout=10
+        )
+
+        if respuesta.status_code == 200:
+            logging.info("Log enviado correctamente a Google Sheets.")
+        else:
+            logging.warning(
+                "No se pudo enviar el log. Código HTTP: %s",
+                respuesta.status_code
+            )
+
+    except requests.RequestException as error:
+        logging.warning(
+            "Error conectando con API de logs: %s",
+            error
+        )
 
 
 def main():
+    print("Equipo:", EQUIPO)
+    print("Sistema operativo:", SISTEMA_OPERATIVO)
+    global EJECUCION_ID
+    global ESTADO_EJECUCION
+
+    EJECUCION_ID = (
+        datetime.now().strftime("EJEC-%Y%m%d-%H%M%S")
+        + "-"
+        + EQUIPO
+    )
+    ESTADO_EJECUCION = "EN_PROCESO"
 
     print("=== ROBOT RPA - DEMO TESTFIRE ===")
 
@@ -364,6 +455,12 @@ def main():
 
     try:
         logging.info("Inicio de ejecución del robot.")
+
+        enviar_log_api(
+            "INFO",
+            "Robot",
+            "Inicio de ejecución del robot"
+        )
 
         # -------------------------
         # ABRIR TESTFIRE
@@ -477,14 +574,29 @@ def main():
             archivo = guardar_excel(movimientos)
 
             if archivo:
+                ESTADO_EJECUCION = "EXITOSA"
                 print(f"OK: reporte generado en {archivo}")
             else:
+                ESTADO_EJECUCION = "SIN_DATOS"
+                enviar_log_api(
+                    "WARNING",
+                    "Excel",
+                    "No se generó el reporte porque no había movimientos",
+                    ESTADO_EJECUCION
+                )
                 print(
                     "El robot terminó, pero no encontró "
                     "movimientos para exportar."
                 )
 
         else:
+            ESTADO_EJECUCION = "ERROR_LOGIN"
+            enviar_log_api(
+                "ERROR",
+                "Login",
+                "Credenciales inválidas o sesión no iniciada",
+                ESTADO_EJECUCION
+            )
             print(
                 "ERROR: credenciales inválidas "
                 "o sesión no iniciada."
@@ -496,8 +608,16 @@ def main():
     # -------------------------
 
     except InterferenciaUsuario as error:
+        
 
+        ESTADO_EJECUCION = "CANCELADA_INTERFERENCIA"
         logging.error(str(error))
+        enviar_log_api(
+            "ERROR",
+            "Interferencia",
+            str(error),
+            ESTADO_EJECUCION
+        )
 
         print("AUTOMATIZACIÓN CANCELADA:")
         print("Se detectó intervención manual del usuario.")
@@ -508,10 +628,16 @@ def main():
     # -------------------------
 
     except (TimeoutException, NoSuchElementException) as error:
-
+        ESTADO_EJECUCION = "ERROR_SELENIUM"
         logging.exception(
             "Error de Selenium: %s",
             error
+        )
+        enviar_log_api(
+            "ERROR",
+            "Selenium",
+            f"No se encontró un elemento esperado: {error}",
+            ESTADO_EJECUCION
         )
 
         print(
@@ -531,10 +657,17 @@ def main():
     # -------------------------
 
     except Exception as error:
+        ESTADO_EJECUCION = "ERROR_GENERAL"
 
         logging.exception(
             "Error inesperado: %s",
             error
+        )
+        enviar_log_api(
+            "ERROR",
+            "General",
+            f"Error inesperado: {error}",
+            ESTADO_EJECUCION
         )
 
         print(
@@ -560,6 +693,12 @@ def main():
 
         logging.info(
             "Fin de ejecución del robot."
+        )
+        enviar_log_api(
+            "INFO",
+            "Robot",
+            "Fin de ejecución del robot",
+            ESTADO_EJECUCION
         )
 
         print(
