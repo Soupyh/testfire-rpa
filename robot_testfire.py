@@ -13,6 +13,7 @@ Objetivo:
 8) Guardar capturas y logs como evidencia.
 """
 
+import getpass
 import time
 import logging
 import requests
@@ -440,8 +441,8 @@ def main():
     print("=== ROBOT RPA - DEMO TESTFIRE ===")
 
     # Credenciales del entorno demo
-    usuario = "jsmith"
-    clave = "demo1234"
+    usuario = input("Usuario TestFire: ")
+    clave = getpass.getpass("Contraseña TestFire: ")
 
     # Configuración de Chrome
     opciones = webdriver.ChromeOptions()
