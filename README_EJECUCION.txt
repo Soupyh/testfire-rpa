@@ -10,6 +10,8 @@ SOLUCIÓN RPA - DEMO TESTFIRE
 
    pip install -r requirements.txt
 
+   python -m pip install -r requirements.txt
+
 3. Ejecutar
    python robot_testfire.py
 
